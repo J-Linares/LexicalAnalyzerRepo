@@ -71,8 +71,11 @@ int main(){
 
 for(int idx = 0; index < GlobalStorage.size();idx++){
 	//we begin splitting strings right here
-	
+	string currentLexeme =	GlobalStorage[idx];		
+	vector<char> lexemeChars(currentLexeme.begin(), currentLexeme.end());
+
 }
 	
 }
+
 
