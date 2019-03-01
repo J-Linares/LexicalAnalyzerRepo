@@ -26,9 +26,8 @@ int main(){
 	
 	vector<Tokens> VectorOfTokens;	//as we store them, we will classify them
 					//with their respective token/lexeme
-	vector<string> TempVector;	//will  house split items for the vector
+	vector<char> TempVector;	//will  house split items for the vector
 	vector<string> GlobalStorage;	//stores all strings for manipulation 
-	
 	//temporary vectors will be used to split items apart  from the global
 	// storage, at the end , the vector of tokens will house all split items
 	// and their definitions 
@@ -72,8 +71,28 @@ int main(){
 for(int idx = 0; index < GlobalStorage.size();idx++){
 	//we begin splitting strings right here
 	string currentLexeme =	GlobalStorage[idx];		
-	vector<char> lexemeChars(currentLexeme.begin(), currentLexeme.end());
-
+	//a respective lexeme should now be held inside this vector of chars
+	//ex:  n, u , m , 1 , ","
+	TempVector(currentLexeme.begin(), currentLexeme.end());
+	vector<char> word;	
+	for(int charIdx = 0; charIdx < TempVector.size(); charIdx++){
+		//if the next item in the vector turns out not to be 
+		//human language char then, we will take all previous items and convert
+		//them to a singular string , and push it onto the vector, after that
+		//we will push that singular object as a singular respective token 
+		//into the vector
+		
+		if(isalnum(TempVector[charIdx]) == false){
+			
+			if(TempVector[charIdx] == '$'){
+				word.push_back(TempVector[charIdx]);	
+			}
+		VectorOfTokens.push_back(TempVector[charIdx]);
+		}	
+		word.push_back(TempVector[charIdx]);
+	}
+	VectorofTokens.push_back(word);
+	word.clear();
 }
 	
 }
