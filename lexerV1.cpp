@@ -24,15 +24,21 @@ int main(){
 	//then include a file
 	cout << "What file would you wish to process in this current Directory\n" << endl;
 	
-	vector<Tokens> VectorOfTokens;
-	vector<string> TempVector;
-		
+	vector<Tokens> VectorOfTokens;	//as we store them, we will classify them
+					//with their respective token/lexeme
+	vector<string> TempVector;	//will  house split items for the vector
+	vector<string> GlobalStorage;	//stores all strings for manipulation 
+	
+	//temporary vectors will be used to split items apart  from the global
+	// storage, at the end , the vector of tokens will house all split items
+	// and their definitions 
+
 	cout << "Specify the file you wish to manipulate: "
 	string filename; 
 	cin >> filename;
 
 	string commentTrash; // we will ignore comments in the lexical analysis
-
+	string codeEntry;
 	//create the data containers that
 	//will house the items that we findthrough the lexical analyzer
         // this array of tokens 	
@@ -48,7 +54,7 @@ int main(){
 	//read in the file and find a wya to process the contents
 	// and seperate them
 	
-	while(inputFile != NULL){
+	while(inputFile >> codeEntry){
 		//while input file is taking in some form of inpuit
 		//we will need t process teh data within the text file
 		if(inputFile.peek('!')){
@@ -56,10 +62,17 @@ int main(){
 			//it is a comment operator/indicator
 			getline(inputFile,commentTrash);
 		}
-		
+	//take the data into the data containers we will use for manipulation	
+		GlobalStorage.push_back(codeEntry);	
 
-	
 	}
+
+	inputFile.close();
+
+for(int idx = 0; index < GlobalStorage.size();idx++){
+	//we begin splitting strings right here
+	
+}
 	
 }
 
