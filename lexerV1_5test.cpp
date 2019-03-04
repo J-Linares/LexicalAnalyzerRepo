@@ -50,7 +50,7 @@ int main()
     //NOTE: on my raspberry pi, my computer would not specify the local directory for
     //the file location, i recommend you specify the file name or the directory to ensure that the correct file is being read in
     //
-    inputFile.open("/home/pi/Desktop/CompilersProjects/CompilerClassProject/input.txt",ios::in);
+    inputFile.open("/home/pi/Desktop/CompilersProjects/CompilerClassProject/input2.txt",ios::in);
     if(inputFile.is_open())
     {
         //   cout << "we have located the File: " << filename << endl;
@@ -70,7 +70,7 @@ int main()
         //we will need t process teh data within the text file
         inputFile >> codeEntry;
         //cout << codeEntry << endl;
-        if(codeEntry == "!")
+        if(codeEntry.front() == '!')
         {
 
             //this should remove any line that uses! at the beginning,
@@ -121,33 +121,27 @@ int main()
             if(isalnum(lexemeArray[arrIdx]) == false)
             {
                 //elliminates whitespace from non alphanumeric chars
-                if(lexemeArray[arrIdx] == '$')
-                {
-                    //this is part of an identifier, so it should be attend into a word we will keep
-                    word.push_back(lexemeArray[arrIdx]);
-                }
                 //any other found lexemes can be of any different kind of token
                 //so we must seperate them all and treat them as different additions to our token vector
                 //here we should take all previous chars and combine them into a singular string to add into
                 //the vector of tokens, we must push the word we currently have onto the vector, and the new singular token
-                if(isspace(lexemeArray[arrIdx]) == false)
+                if(isspace(lexemeArray[arrIdx]) == false && (lexemeArray[arrIdx] != '$') )
                 {
                     //do nothing?
-
                     wordStorage.push_back(word);
                     word.clear();
-                    //wordStorage.push_back(lexemeArray);
-
+                    string symbol(1 ,lexemeArray[arrIdx]);
+                    wordStorage.push_back(symbol);
+                    continue;
                 }
 
             }
             word.push_back(lexemeArray[arrIdx]);
         }
         wordStorage.push_back(word);
-
     }
     for(int idx = 0; idx < wordStorage.size(); idx++)
     {
-        cout << wordStorage[idx] << endl;
+        cout << wordStorage[idx];
     }
 }
