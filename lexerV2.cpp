@@ -10,10 +10,60 @@
 //since using namespace is not portable code we will be forced to
 //to include std:: before every type of output manipulation
 using namespace std;
-vector<string> TextInput;  //this vector will house info from fstream
+
+vector<string> textInput;  //this vector will house info from fstream
 vector<char> wordVector;   //this vector will house a string taken from
 //fstream, spkit into chars
 vector<string> splitLexemes;	//vector that houses split lexemes
+
+struct Token{
+    string lexeme;
+    string attribute;
+}
+
+Token entry;
+vector<Token> all_tokens;
+
+
+void storeTokens(vector<string> splitLexemes){
+    string tempLexeme;
+    for(int idx = 0; idx < splitLexemes.size(); idx++ ){
+        tempLexeme = splitLexemes[idx];
+
+        if(tempLexeme[idx] == "int" || tempLexeme[idx] == "float"||tempLexeme[idx] == "bool" || tempLexeme[idx] == "if"|| tempLexeme[idx] == "else"|| tempLexeme[idx] == "then"
+        || tempLexeme[idx] == "do"|| tempLexeme[idx] == "while"|| tempLexeme[idx] == "whileend"|| tempLexeme[idx] == "int"|| tempLexeme[idx] == "doend"|| tempLexeme[idx] == "for"
+        || tempLexeme[idx] == "and"|| tempLexeme[idx] == "or"|| tempLexeme[idx] == "function"|| tempLexeme[idx] == "return"|| tempLexeme[idx] == "put"){
+
+            tempLexeme[idx] >> entry.lexeme();
+            "KEYWORD" >> entry.attribute();
+
+            all_tokens.push_back(entry);
+        }
+
+        else if(tempLexeme[idx] == '{'|| tempLexeme[idx] == '}'|| tempLexeme[idx] == '['|| tempLexeme[idx] == ']'|| tempLexeme[idx] == '('|| tempLexeme[idx] == ')'|| tempLexeme[idx] == ','
+        || tempLexeme[idx] == '.'|| tempLexeme[idx] == ';'|| tempLexeme[idx] == ':'|| tempLexeme[idx] == '!'){
+
+            tempLexeme[idx] >> entry.lexeme();
+            "SEPERATOR" >> entry.attribute();
+
+            all_tokens.push_back(entry);
+        }
+        else if(tempLexeme[idx] == '*'|| tempLexeme[idx] == '+'|| tempLexeme[idx] == '-'|| tempLexeme[idx] == '='|| tempLexeme[idx] == '/'|| tempLexeme[idx] == '>'|| tempLexeme[idx] == '<'
+        || tempLexeme[idx] == '%'){
+
+            tempLexeme[idx] >> entry.lexeme();
+            "OPERATOR" >> entry.attribute();
+
+            all_tokens.push_back(entry);
+
+        }
+        else
+            tempLexeme[idx] >> entry.lexeme();
+            "IDENTIFIER" >> entry.attribute();
+
+            all_tokens.push_back(entry);
+    }
+}
 
 bool symbolHere = false;
 bool inFront = false;
@@ -22,6 +72,11 @@ int symbolIndex = 0;
 
 string begWord;
 string tempString;
+
+void tokenIdentifier(vector<char> splitLexemes){
+
+
+}
 
 
 void splitString(string lexeme)
@@ -41,7 +96,12 @@ void isSymbol(vector<char> word)
 
     while (symbolHere == false)							//As long as the symbol hasn't been found, we go through the array
     {
-        if(isalnum(word[wordPosition]) == false && isspace(word[wordPosition] == false && word[wordPosition != '$']))
+        //if(isalnum(word[wordPosition]) == false && isspace(word[wordPosition] == false && word[wordPosition != '$']))
+        if (word[wordPosition] == '!' ||word[wordPosition] == '(' || word[wordPosition] == ')' || word[wordPosition] == ','
+			|| word[wordPosition] == '{' || word[wordPosition] == '}' || word[wordPosition] == ';' || word[wordPosition] =='*'|| word[wordPosition] == '+'
+			|| word[wordPosition] == '-'|| word[wordPosition] == '='|| word[wordPosition] == '/'|| word[wordPosition] == '>'
+			|| word[wordPosition] == '<'|| word[wordPosition] == '%'|| word[wordPosition] == '['|| word[wordPosition] == ']'|| word[wordPosition] =='.'
+			|| word[wordPosition] == ':'|| word[wordPosition] == ':')
         {
             if (wordPosition == 0)							//Assuming that the symbol is in the front
             {
@@ -95,7 +155,7 @@ void shiftVector(vector<char> word)
 
 void splitSymbol(vector<char> currentWord)
 {
-    if(symbolHere == true && symbolIndex == 0, && inFront == true && currentWord.size() == 1)
+    if(symbolHere == true && symbolIndex == 0  && inFront == true && currentWord.size() == 1)
     {
 
         string tempSymbol;
@@ -132,7 +192,7 @@ void splitSymbol(vector<char> currentWord)
         {
 
             tempOne.push_back(currentWord[idx]);
-            shiftVector(word);
+            shiftVector(currentWord);
         }
 
         splitLexemes.push_back(tempOne);
@@ -159,7 +219,7 @@ void splitSymbol(vector<char> currentWord)
         }
         splitLexemes.push_back(tempFString);
         symbolHere = false;
-        symbolndex = 0;
+        symbolIndex = 0;
     }
 }
 
@@ -181,7 +241,7 @@ int main()
     //the file location, i recommend you specify the file
     //name or the directory to ensure that the correct file is
     //being read in
-    inputFile.open("inputfile.txt");
+    inputFile.open("/home/pi/Desktop/CompilersProjects/CompilerClassProject/input2.txt");
     // this should take in a file that the user should specify
     //we now have the file accessed and open,it is here where we
     // make sure to close the file when finished processing
@@ -196,7 +256,7 @@ int main()
 
             //this should remove any line that uses! at the beginning,
             //it is a comment operator/indicator
-            getline(inputFile,commentTrash);
+            getline(inputFile,commentLine);
             cout <<"we are skipping a comment line: " << codeEntry <<commentLine << endl;
             inputFile >> codeEntry;
         }
@@ -225,8 +285,9 @@ int main()
     }
 
     for(int idx = 0; idx < splitLexemes.size(); idx++)
-    {
+    {   //read the final; vector and compare it to identify what kind of lexeme it is
         cout << splitLexemes[idx] << endl;
     }
 
 }
+
