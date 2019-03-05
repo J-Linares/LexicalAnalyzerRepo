@@ -18,6 +18,10 @@ vector<string> splitLexemes;	//vector that houses split lexemes
 struct Token{
     string lexeme;
     string attribute;
+
+    void PrintToken(){
+        cout <<"Token: " << attribute << " Lexeme: " << lexeme <<endl;
+    }
 };
 
 
@@ -30,34 +34,38 @@ void storeTokens(vector<string> Lexemes, Token entry, vector<Token> all_tokens){
         || tempLexeme == "do"|| tempLexeme == "while"|| tempLexeme == "whileend"|| tempLexeme == "int"|| tempLexeme == "doend"|| tempLexeme == "for"
         || tempLexeme == "and"|| tempLexeme == "or"|| tempLexeme == "function"|| tempLexeme == "return"|| tempLexeme == "put"){
 
-            entry.lexeme(`tempLexeme);
-            entry.attribute("KEYWORDS");
+            entry.lexeme = tempLexeme;
+            entry.attribute = "KEYWORD";
 
             all_tokens.push_back(entry);
+            continue;
         }
 
-        else if(tempLexeme == "{"|| tempLexeme == "}"|| tempLexeme == "["|| tempLexeme == "]"|| tempLexeme == "("|| tempLexeme == "}"|| tempLexeme == ","
+        if(tempLexeme == "{"|| tempLexeme == "}"|| tempLexeme == "["|| tempLexeme == "]"|| tempLexeme == "("|| tempLexeme == "}"|| tempLexeme == ","
         || tempLexeme == "."|| tempLexeme == ";"|| tempLexeme == ":"|| tempLexeme == "!"){
 
-            tempLexeme >> entry.lexeme();
-            "SEPERATOR" >> entry.attribute();
+            entry.lexeme = tempLexeme;
+            entry.attribute = "SEPERATOR";
 
             all_tokens.push_back(entry);
+            continue;
         }
-        else if(tempLexeme == "*"|| tempLexeme == "+"|| tempLexeme == "-"|| tempLexeme == "="|| tempLexeme == "/"|| tempLexeme == ">"|| tempLexeme == "<"
+        if(tempLexeme == "*"|| tempLexeme == "+"|| tempLexeme == "-"|| tempLexeme == "="|| tempLexeme == "/"|| tempLexeme == ">"|| tempLexeme == "<"
         || tempLexeme == "%"){
 
-            tempLexeme >> entry.lexeme();
-            "OPERATOR" >> entry.attribute();
+            entry.lexeme = tempLexeme;
+            entry.attribute = "OPERATOR";
 
             all_tokens.push_back(entry);
+            continue;
 
         }
         else
-            tempLexeme >> entry.lexeme();
-            "IDENTIFIER" >> entry.attribute();
+            entry.lexeme = tempLexeme;
+            entry.attribute ="IDENTIFIER";
 
             all_tokens.push_back(entry);
+            continue;
     }
 }
 
@@ -68,11 +76,6 @@ int symbolIndex = 0;
 
 string begWord;
 string tempString;
-
-void tokenIdentifier(vector<char> splitLexemes){
-
-
-}
 
 
 void splitString(string lexeme)
@@ -228,7 +231,7 @@ int main()
     //then include a file
     //string filename;
     //cin >> filename;
-    Token entry;
+    Token insertion;
     vector<Token> tokenStorage;
     ifstream inputFile;
     string commentLine;
@@ -238,7 +241,7 @@ int main()
     //the file location, i recommend you specify the file
     //name or the directory to ensure that the correct file is
     //being read in
-    inputFile.open("/home/pi/Desktop/CompilersProjects/CompilerClassProject/input2.txt");
+    inputFile.open("/home/pi/Desktop/CompilersProjects/CompilerClassProject/input.txt");
     // this should take in a file that the user should specify
     //we now have the file accessed and open,it is here where we
     // make sure to close the file when finished processing
@@ -281,11 +284,15 @@ int main()
 
     }
 
-    for(int idx = 0; idx < splitLexemes.size(); idx++)
+   for(int idx = 0; idx < splitLexemes.size(); idx++)
     {   //read the final; vector and compare it to identify what kind of lexeme it is
-        cout << splitLexemes[idx] << endl;
-        storeTokens(splitLexemes, entry,tokenStorage);
+//        cout << splitLexemes[idx] << endl;
+        storeTokens(splitLexemes, insertion,tokenStorage);
     }
 
+    for(int idx = 0; idx < tokenStorage.size(); idx++)
+    {   //read the final; vector and compare it to identify what kind of lexeme it is
+       tokenStorage[idx].PrintToken();
+    }
 }
 
