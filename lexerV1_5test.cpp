@@ -50,7 +50,7 @@ int main()
     //NOTE: on my raspberry pi, my computer would not specify the local directory for
     //the file location, i recommend you specify the file name or the directory to ensure that the correct file is being read in
     //
-    inputFile.open("/home/pi/Desktop/CompilersProjects/CompilerClassProject/input2.txt",ios::in);
+    inputFile.open("/home/pi/Desktop/CompilersProjects/CompilerClassProject/input.txt",ios::in);
     if(inputFile.is_open())
     {
         //   cout << "we have located the File: " << filename << endl;
@@ -140,8 +140,5 @@ int main()
         }
         wordStorage.push_back(word);
     }
-    for(int idx = 0; idx < wordStorage.size(); idx++)
-    {
-        cout << wordStorage[idx];
-    }
+  
 }
