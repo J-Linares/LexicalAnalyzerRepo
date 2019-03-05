@@ -67,7 +67,7 @@ vector<Token> storeTokens(vector<string> Lexemes, Token entry, vector<Token> all
             entry.attribute ="IDENTIFIER";
 
             all_tokens.push_back(entry);
-			continue;
+			
     }
 
 	return all_tokens;
@@ -96,7 +96,7 @@ void isSymbol(vector<char> word)
 
     while (symbolHere == false)							//As long as the symbol hasn't been found, we go through the array
     {
-        //if(isalnum(word[wordPosition]) == false && isspace(word[wordPosition] == false && word[wordPosition != '$']))
+        //if(isalnum(word[wordPosition]) == false && isspace(word[wordPosition] == false && word[wordPosition != '$'])) <---thois is prone to errors
         if (word[wordPosition] == '!' ||word[wordPosition] == '(' || word[wordPosition] == ')' || word[wordPosition] == ','
 			|| word[wordPosition] == '{' || word[wordPosition] == '}' || word[wordPosition] == ';' || word[wordPosition] =='*'|| word[wordPosition] == '+'
 			|| word[wordPosition] == '-'|| word[wordPosition] == '='|| word[wordPosition] == '/'|| word[wordPosition] == '>'
@@ -251,7 +251,7 @@ int main()
 	vector<Token> tokenStorage;   
 	ifstream inputFile;
     
-	string commentLine;
+	
     string codeEntry;
     //NOTE: on my raspberry pi, my computer would not specify
     //the local directory for
@@ -267,10 +267,10 @@ int main()
         //while input file is taking in some form of inpuit
         //we will need t process teh data within the text file
         inputFile >> codeEntry;
-        //cout << codeEntry << endl;
-        if(codeEntry.front() == '!')
+		//issues arise with input2 for some reason?, particularly when meeting the condition of this if Statement
+		if(codeEntry.front() == '!')
         {
-
+			string commentLine;
             //this should remove any line that uses! at the beginning,
             //it is a comment operator/indicator
             getline(inputFile,commentLine);
@@ -279,7 +279,8 @@ int main()
         }
         //take the data from the text file and place it into the vector
         //to meet our lexer needs
-        textInput.push_back(codeEntry);
+		else
+		textInput.push_back(codeEntry);
     }
 
     inputFile.close();
