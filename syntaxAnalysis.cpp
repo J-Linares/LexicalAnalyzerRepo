@@ -237,6 +237,22 @@ void splitSymbol(vector<char> tempWord)
 
 }
 
+//Function will take in a vector given and display stuff
+void printAnalyzer(vector<Token> candidate)
+{
+	cout << "Running the print Analyzer function taking in the vector " << endl;
+	cout << "The size of the vector is: " << candidate.size() << endl;
+
+	cout << "Running the for loop now. " << endl;
+
+	for (int idx = 0; idx < candidate.size(); idx++)
+	{
+		if (idx == 0)
+		{
+
+		}
+	}
+}
 
 
 int main()
@@ -312,37 +328,50 @@ int main()
 		tokenStorage[idx].PrintToken();
     }
 
-
+   cout << "We will now test assignment 2" << endl;
+   cout << "Let's see if this will do the thing. " << endl;
    //**************************************************************************
    //assgihnment 2 begins here
    //read in all objects from the tokenstorage into another vector
-	vector<Token> expression;
+	vector<Token> expression;									//Second vector for comparison and storage
+	cout << "temp Vector created " << endl;
 
 	for(int idx = 0; idx < tokenStorage.size(); idx++){
 		expression.push_back(tokenStorage[idx]);
 
 		if(expression[idx].attribute == "SEPERATOR"){
+			cout << "Vector size is: " << expression.size() << endl;		//Displays the vector size
+			//expression.push_back(tokenStorage[idx]);
+			cout << "The last element of the 2nd vector is: " << expression[idx].attribute << endl;
+
+			//IMPORTANT: May need to use a while loop instead of for loop
+			//THING KEEPS INFINITELY LOOPING
 			for( int expidx = 0; expidx < expression.size(); expidx++ ){
 			// identifiers ,operators   ,  "DO NOT DISPLAY  "=" operator, cause it has no definition	
+				cout << "Testing the thing for loop here" << endl;
 
-				if(expidx = 0){
+				if(expidx == 0)
+				{
 					cout << "Lexeme: " << expression[expidx].lexeme << endl;
 					cout <<  "<Statement> -> <Assign>\n<Assign> -> <Identifier> = <Expression>" << endl;
 				}
 				
-				if(expression[expidx-1].lexeme == "="){
+				else if(expression[expidx-1].lexeme == "=" && expidx != 0)
+				{
 					cout << "Lexeme: " << expression[expidx].lexeme << endl;
 					cout << "<Expression> -> <Term> <Expression Prime>\n<Term> -> <Factor> <Term Prime>\n<Factor> -> <Identifier>" <<endl;
 				}
 
-				if(expression[expidx].attribute == "IDENTIFIER" && expression[expidx-1].lexeme != "=" && expression[expidx+1].lexeme != "=" ){
+				else if(expression[expidx].attribute == "IDENTIFIER" && expression[expidx-1].lexeme != "=" && expression[expidx+1].lexeme != "=" && expidx != 0)
+				{
 					cout << "Lexeme: " << expression[expidx].lexeme << endl;
 					cout << "<Term> -> <Factor> <Term Prime>\n<Factor> -> <Identifier>" << endl;
 				}
 
-				if(expression[expidx].attribute == "OPERATOR" && expression[expidx].attribute != "="){
+				else if(expression[expidx].attribute == "OPERATOR" && expression[expidx].attribute != "=")
+				{
 					cout << "Lexeme: " << expression[expidx].lexeme << endl;
-					cout << "<Term Prime> -> SIGMA\n<Expression Prime> -> + <Term> <Expression Prime>" << endl;
+					cout << "<Term Prime> -> SIGMA\n<Expression Prime> -> " << expression[expidx].lexeme << " <Term> <Expression Prime>" << endl;
 				}
 
 			}
