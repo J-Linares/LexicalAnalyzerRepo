@@ -51,7 +51,7 @@ void isSymbol(vector<char> tempVector)
 		}
 		else
 		{												//assuming that the current element is not a symbol?
-			counter++;									//fucking increment counter, go through loop again at next index
+			counter++;									//increment counter, go through loop again at next index
 		}
 	}
 	
