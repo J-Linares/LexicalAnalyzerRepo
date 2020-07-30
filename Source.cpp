@@ -62,7 +62,7 @@ void printVector(vector<char> tempString)
 {
 	for (int idx = 0; idx < tempString.size(); idx++)			//Loop to go through the string
 	{
-		cout << tempString[idx] << endl;						//Print that bitch
+		cout << tempString[idx] << endl;						//Print string
 	}
 }
 
