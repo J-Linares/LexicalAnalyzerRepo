@@ -7,6 +7,7 @@
 #include <ctype.h>
 #include <numeric>
 #include <iomanip>
+
 //pre processor directives necessary for file manipulation
 //since using namespace is not portable code we will be forced to
 //to include std:: before every type of output manipulation
@@ -125,7 +126,7 @@ void isSymbol(vector<char> word)
         else
         {
             //assuming that the current element is not a symbol?
-            wordPosition++;									//fucking increment counter, go through loop again at next index
+            wordPosition++;									//increment counter, go through loop again at next index
         }
     }
 
@@ -191,7 +192,7 @@ void splitSymbol(vector<char> tempWord)
 
 	}
 
-	//We can assume that the symbol exists and is not at the front, therefore let's split the bitch
+	//We can assume that the symbol exists and is not at the front, therefore let's split the string
 	//IE Bob!Lee
 	else if (symbolHere == true && symbolIndex != 0 && inFront == false)
 	{
@@ -331,7 +332,7 @@ int main()
    cout << "We will now test assignment 2" << endl;
    cout << "Let's see if this will do the thing. " << endl;
    //**************************************************************************
-   //assgihnment 2 begins here
+   //part 2 begins here
    //read in all objects from the tokenstorage into another vector
 	vector<Token> expression;									//Second vector for comparison and storage
 	cout << "temp Vector created " << endl;
