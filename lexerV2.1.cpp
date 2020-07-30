@@ -190,7 +190,7 @@ void splitSymbol(vector<char> tempWord)
 
 	}
 
-	//We can assume that the symbol exists and is not at the front, therefore let's split the bitch
+	//We can assume that the symbol exists and is not at the front, therefore let's split this string
 	//IE Bob!Lee
 	else if (symbolHere == true && symbolIndex != 0 && inFront == false)
 	{
