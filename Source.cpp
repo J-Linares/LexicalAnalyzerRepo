@@ -84,7 +84,7 @@ void shiftVector(vector<char> othertempWord)
 	int firstVectorSize = othertempWord.size();					//Stores the vector size as an int variable
 	if (firstVectorSize != 1)									//Assuming that the first vector isn't the size 1
 	{
-		for (int idx = 1; idx < othertempWord.size(); idx++)	//shift shit here. Start at 2nd index
+		for (int idx = 1; idx < othertempWord.size(); idx++)	//shift here. Start at 2nd index
 		{
 			wordVector[idx - 1] = wordVector[idx];				//Moves everything from the right one index to the left. Shift this way <--
 		}
@@ -148,7 +148,7 @@ void splitSymbol(vector<char> tempWord)
 
 	}
 
-	//We can assume that the symbol exists and is not at the front, therefore let's split the bitch
+	//We can assume that the symbol exists and is not at the front, therefore let's split here
 	//IE Bob!Lee
 	else if (symbolHere == true && symbolIndex != 0 && inFront == false)
 	{
