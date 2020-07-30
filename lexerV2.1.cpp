@@ -125,7 +125,7 @@ void isSymbol(vector<char> word)
         else
         {
             //assuming that the current element is not a symbol?
-            wordPosition++;									//fucking increment counter, go through loop again at next index
+            wordPosition++;									//increment counter, go through loop again at next index
         }
     }
 
@@ -174,7 +174,6 @@ void splitSymbol(vector<char> tempWord)
 	}
 
 	//If the symbol exists in the first position vector and there is more elements in the vector
-	// IE: (BOOOOOOB
 	else if (symbolHere == true && symbolIndex == 0 && inFront == true && tempWord.size() > 1)
 	{
 
