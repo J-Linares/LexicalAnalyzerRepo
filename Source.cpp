@@ -123,7 +123,7 @@ void splitSymbol(vector<char> tempWord)
 		finalVector.push_back(tempSymbolString);			//Push the string with symbol into the back of the vector
 
 		wordVector.clear();									//clears word Vector
-																//Resets data used for this
+															//Resets data used for this
 		inFront = false;
 		symbolHere = false;
 		symbolIndex = 0;
